@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}">
+<head>
+    <title>Help Center</title>
+
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 dark:text-gray-100">
+<div id="content">
+    <div class="max-w-4xl mx-auto p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md mt-20">
+        <h1 class="text-3xl font-bold mb-6 text-center mt-5 dark:text-gray-100">Help & Support</h1>
+        <p class="text-gray-600 dark:text-gray-300 text-center mb-6">How can we assist you? Please choose an option below:</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- FAQ Section -->
+            <div class="bg-blue-100 dark:bg-blue-900 p-4 rounded-lg shadow">
+                <h2 class="text-xl font-semibold mb-2 dark:text-gray-100">Frequently Asked Questions (FAQ)</h2>
+                <p class="text-gray-700 dark:text-gray-300">Find answers to common questions related to our services.</p>
+                <a href="/faq" class="mt-4 inline-block bg-blue-600 dark:bg-blue-700 text-white py-2 px-4 rounded-lg hover:bg-blue-700 dark:hover:bg-blue-800 transition duration-300">
+                    View FAQs
+                </a>
+            </div>
+
+            <!-- Contact Support Section -->
+            <div class="bg-green-100 dark:bg-green-900 p-4 rounded-lg shadow">
+                <h2 class="text-xl font-semibold mb-2 dark:text-gray-100">Contact Support</h2>
+                <p class="text-gray-700 dark:text-gray-300">Need further assistance? Reach out to our support team.</p>
+                <a href="/contact" class="mt-4 inline-block bg-green-600 dark:bg-green-700 text-white py-2 px-4 rounded-lg hover:bg-green-700 dark:hover:bg-green-800 transition duration-300">
+                    Contact Support
+                </a>
+            </div>
+
+            <!-- Live Chat Section -->
+            <div class="bg-yellow-100 dark:bg-yellow-900 p-4 rounded-lg shadow">
+                <h2 class="text-xl font-semibold mb-2 dark:text-gray-100">Live Chat</h2>
+                <p class="text-gray-700 dark:text-gray-300">Chat with our support team in real time for immediate assistance.</p>
+                <a href="/live-chat" class="mt-4 inline-block bg-yellow-600 dark:bg-yellow-700 text-white py-2 px-4 rounded-lg hover:bg-yellow-700 dark:hover:bg-yellow-800 transition duration-300">
+                    Start Live Chat
+                </a>
+            </div>
+
+            <!-- Feedback Section -->
+            <div class="bg-purple-100 dark:bg-purple-900 p-4 rounded-lg shadow">
+                <h2 class="text-xl font-semibold mb-2 dark:text-gray-100">Feedback</h2>
+                <p class="text-gray-700 dark:text-gray-300">We value your feedback! Share your experience with us.</p>
+                <a href="/feedback" class="mt-4 inline-block bg-purple-600 dark:bg-purple-700 text-white py-2 px-4 rounded-lg hover:bg-purple-700 dark:hover:bg-purple-800 transition duration-300">
+                    Give Feedback
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    console.log("this is help center page");
+</script>
+</body>
+</html>
