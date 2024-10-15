@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Page</title>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900">
+<div id="content" class="text-center mt-5 mx-auto w-11/12 sm:w-2/3 lg:w-1/2">
+    <!-- Display session message if available -->
+    <div th:if="${session.message}"
+         class="flex items-center p-4 mb-4 text-sm text-red-800 bg-red-50 rounded-lg dark:bg-red-200 dark:text-red-900"
+         role="alert">
+        <svg class="w-5 h-5 mr-2 flex-shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+        </svg>
+        <span class="sr-only">Info</span>
+        <span th:text="${session.message}"></span>
+    </div>
+
+    <!-- Clear session message -->
+    <div th:if="${session.message}">
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Clear the message from session on page load
+                fetch('/clear-message', { method: 'POST' })
+                    .then(response => response.text())
+                    .then(data => console.log('Message cleared'));
+            });
+        </script>
+    </div>
+</div>
+<script>
+    console.log("Home page loaded");
+</script>
+</body>
+</html>

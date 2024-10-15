@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success Page</title>
+</head>
+<body>
+<div id="content" class="text-center mt-10 w-full max-w-md mx-auto">
+    <!-- Success message -->
+    <div th:if="${session.message}"
+         class="flex items-center p-4 mb-6 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"
+         role="alert">
+        <svg class="w-5 h-5 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+        </svg>
+        <span th:text="${session.message}"></span>
+    </div>
+
+    <!-- Clear message script -->
+    <div th:if="${session.message}">
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Clear the message from session after display
+                fetch('/clear-message', { method: 'POST' })
+                    .then(response => response.text())
+                    .then(() => console.log('Session message cleared.'));
+            });
+        </script>
+    </div>
+
+    <!-- Login button -->
+    <a href="/login" class="bg-gray-900 dark:bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 mt-2 inline-block">
+        Go to Login
+    </a>
+</div>
+
+<script>
+    console.log("Success page loaded.");
+</script>
+</body>
+</html>
