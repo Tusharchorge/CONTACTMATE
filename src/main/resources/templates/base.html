@@ -7,14 +7,13 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title data-th-replace="${title}">CONTACTMATE</title>
+    <title data-th-replace="${title}">CONTAX</title>
 
     <link
             href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"
             rel="stylesheet"
     />
     <link rel="stylesheet" data-th-href="@{'output.css'}" />
-    <link rel="stylesheet" data-th-href="@{'style.css'}" />
 
 
 
@@ -35,18 +34,19 @@
     <div data-th-replace="~{user/user_navbar::user-navbar}"></div>
 </div>
 
-<div data-th-if="${loggedInUser}">
-    <div data-th-replace="~{user/sidebar::sidebar}"></div>
-</div>
+
+
+
 
 <div th:unless="${loggedInUser}">
     <div data-th-replace="~{navbar :: navbar}"></div>
 </div>
 
 <!-- main content -->
-<div class="p-4">
+<div class="">
     <section data-th-replace="${content}"></section>
 </div>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

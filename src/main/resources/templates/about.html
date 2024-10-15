@@ -1,24 +1,33 @@
 <!DOCTYPE html>
-<html
-        lang="en"
-        th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}"
->
+<html lang="en" th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}">
 <head>
-    <title>About Page</title>
+    <title>About ContactMate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
 <div id="content">
-    <h1>Welcome to about page</h1>
-    <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur,
-        ratione!
-    </p>
+    <section class="bg-white dark:bg-gray-900">
+        <div class="gap-16 items-center py-16 px-6 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-24 lg:px-8">
+            <!-- Text Section -->
+            <div class="font-light text-gray-800 dark:text-gray-400">
+                <h2 class="mb-8 text-3xl font-bold tracking-tight text-blue-900 dark:text-white">
+                    Effortless Connections with ContactMate
+                </h2>
+                <p class="mb-8">At ContactMate, we believe in making your communication seamless. Our app revolutionizes the way you manage contacts by integrating advanced organization, quick search functionalities, and intuitive UI design.</p>
+                <p class="mb-8">Our goal is to provide you with the easiest way to stay connected. Whether it's managing personal or professional relationships, ContactMate is designed to help you organize your contacts in a way that works best for you.</p>
+                <p>Our smart contact manager is built with a user-first approach, offering real-time updates and customizable features, making contact management faster and smarter.</p>
+            </div>
+            <!-- Image Section -->
+            <div class="grid grid-cols-2 gap-4 mt-8 lg:mt-0">
+                <img class="w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-long-2.png" alt="Team at work">
+                <img class="mt-4 w-full lg:mt-8 rounded-lg" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-long-1.png" alt="Modern office">
+            </div>
+        </div>
+    </section>
 </div>
+
 <script>
-    console.log("about page");
-</script>
-<script>
-    console.log("second about page script");
+    console.log("about page for ContactMate");
 </script>
 </body>
 </html>
