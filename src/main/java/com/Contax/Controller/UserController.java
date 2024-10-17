@@ -38,10 +38,5 @@ public class UserController {
 
 
 
-    @PostConstruct
-    public void checkEnvVariables() {
-        System.out.println("Google Client ID: " + System.getenv("GOOGLE_CLIENT_ID"));
-        System.out.println("Google Client Secret: " + System.getenv("GOOGLE_CLIENT_SECRET"));
-    }
 
 }
