@@ -1,6 +1,7 @@
 package com.Contax.Config;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.UUID;
 import com.Contax.Entities.Providers;
@@ -17,10 +18,10 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 import java.util.List;
+import java.util.Optional;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
-
 import jakarta.servlet.http.HttpServletResponse;
 
 @Component
@@ -40,14 +41,13 @@ public class OAuthAuthenticationSuccessHandler implements AuthenticationSuccessH
         logger.info("OAuthAuthenticationSuccessHandler");
 
         // identify the provider
-
-        var oAuth2AuthenticationToken = (OAuth2AuthenticationToken) authentication;
+        OAuth2AuthenticationToken oAuth2AuthenticationToken = (OAuth2AuthenticationToken) authentication;
 
         String authorizedClientRegistrationId = oAuth2AuthenticationToken.getAuthorizedClientRegistrationId();
 
         logger.info(authorizedClientRegistrationId);
 
-        var oauthUser = (DefaultOAuth2User) authentication.getPrincipal();
+        DefaultOAuth2User oauthUser = (DefaultOAuth2User) authentication.getPrincipal();
 
         oauthUser.getAttributes().forEach((key, value) -> {
             logger.info("{} : {}", key, value);
@@ -55,7 +55,7 @@ public class OAuthAuthenticationSuccessHandler implements AuthenticationSuccessH
 
         User user = new User();
         user.setUserId(UUID.randomUUID().toString());
-        user.setRoleList(List.of(AppConstants.ROLE_USER));
+        user.setRoleList(Arrays.asList(AppConstants.ROLE_USER)); // Java 8 compatibility
         user.setEmailVerified(true);
         user.setEnabled(true);
         user.setPassword("dummy");
@@ -71,9 +71,8 @@ public class OAuthAuthenticationSuccessHandler implements AuthenticationSuccessH
 
         } else if (authorizedClientRegistrationId.equalsIgnoreCase("github")) {
 
-
             String email = oauthUser.getAttribute("email") != null ?
-                     Objects.requireNonNull(oauthUser.getAttribute("email")).toString()
+                    Objects.requireNonNull(oauthUser.getAttribute("email")).toString()
                     : Objects.requireNonNull(oauthUser.getAttribute("login")).toString() + "@gmail.com";
             String picture = Objects.requireNonNull(oauthUser.getAttribute("avatar_url")).toString();
             String name = Objects.requireNonNull(oauthUser.getAttribute("login")).toString();
@@ -84,20 +83,18 @@ public class OAuthAuthenticationSuccessHandler implements AuthenticationSuccessH
             user.setName(name);
             user.setProviderUserId(providerUserId);
             user.setProvider(Providers.GITHUB);
-
             user.setAbout("This account is created using github");
-        }
-        else {
+
+        } else {
             logger.info("OAuthAuthenticationSuccessHandler: Unknown provider");
         }
-        User user2 = userRepo.findByEmail(user.getEmail()).orElse(null);
-        if (user2 == null) {
+
+        Optional<User> userOptional = userRepo.findByEmail(user.getEmail());
+        if (!userOptional.isPresent()) {
             userRepo.save(user);
-            System.out.println("user saved:" + user.getEmail());
+            System.out.println("user saved: " + user.getEmail());
         }
 
         new DefaultRedirectStrategy().sendRedirect(request, response, "/user/profile");
-
     }
-
 }

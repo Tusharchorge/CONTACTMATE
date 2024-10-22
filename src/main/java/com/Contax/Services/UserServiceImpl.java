@@ -1,5 +1,6 @@
 package com.Contax.Services;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -43,7 +44,7 @@ public class UserServiceImpl implements UserService {
 
         // set the user role
 
-        user.setRoleList(List.of(AppConstants.ROLE_USER));
+        user.setRoleList(Arrays.asList(AppConstants.ROLE_USER));
 
         logger.info(user.getProvider().toString());
         String emailToken = UUID.randomUUID().toString();
