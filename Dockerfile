@@ -1,9 +1,9 @@
-FROM openjdk:21
+FROM openjdk:17-jdk-slim
 
 WORKDIR /app
 
-COPY dist/ContactMate-0.0.1-SNAPSHOT.jar /app/ContactMate-0.0.1-SNAPSHOT.jar
+COPY target/ContactMate-0.0.1-SNAPSHOT.jar app.jar
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "ContactMate-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
