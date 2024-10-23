@@ -1,0 +1,53 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8
+    container_name: mysql_db_docker
+    environment:
+      MYSQL_ROOT_PASSWORD: root12345
+      MYSQL_DATABASE: ContactMate
+    ports:
+      - "3307:3306"
+
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: root12345
+
+    ports:
+      - "8081:80"
+    depends_on:
+      - mysql
+  springboot:
+    build: .
+    container_name: contactmate_springboot_project
+    environment:
+      SERVER_PORT: 8080
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_DB: ContactMate
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root12345
+      EMAIL_HOST: smtp.gmail.com
+      EMAIL_PORT: 587
+      EMAIL_USERNAME: tusharchorge36@gmail.com
+      EMAIL_PASSWORD: gjvbiiqltcasmyss
+      EMAIL_DOMAIN: contactmate.com
+      CLOUDINARY_API_KEY: 643188882488472
+      CLOUDINARY_API_SECRET: aSmHL6FAkK5bNYFv4NeC5ig2lxY
+      CLOUDINARY_NAME: dqtwbhwvf
+    ports:
+      - "8082:8080"
+    depends_on:
+      - mysql
+volumes:
+  mysql_data:
